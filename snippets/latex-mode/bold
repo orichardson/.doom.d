@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bold
+# key: C-b
+# --
+
+\textbf{$1}$0
