@@ -7,13 +7,14 @@
 
 (setq org-startup-folded 'showall)
 
-(setq org-treat-insert-todo-heading-as-state-change t) ; log todo creation
-(setq org-log-into-drawer t)                           ; log into LOGBOOK drawer
-(setq org-support-shift-select t)                      ; use shift + up down to work like
-(setq org-ellipsis "⤵")
+(setq org-treat-insert-todo-heading-as-state-change t ; log todo creation
+      org-log-into-drawer t                           ; log into LOGBOOK drawer
+      org-support-shift-select t                      ; use shift + up down to work like
+      org-ellipsis "⤵")
 ;; (setq evil-respect-visual-line-mode t)       ; This doesn't work, but it can be made to work in
                                                 ; init.el (and in fact it is set there).
-
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 ;;;; ;;;;;;;;;;;;;;;;  JOURNAL ;;;;;;;;;;;;;;;; ;;;;
 (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
 ;; (setq org-default-notes-file (concat org-directory "/v/notes.org"))
@@ -61,8 +62,6 @@
 
 (setq org-journal-file-format "%F.org")
 
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
 
 ;; From https://github.com/bastibe/org-journal
 ;; Section on "iCalendar Export" but also enables agenda integration.
@@ -81,19 +80,19 @@
    (lambda () (font-lock-add-keywords nil
    '(
       ;; ("BOOM" .  'org-table-header)
-        ("\"[a-zA-Z][^\"]*\\S-\"" . 'org-special-keyword) ; quotes
+        ("\"[a-zA-Z][^\"]*\\S-\"" . 'highlight-quoted-symbolhr) ; quotes
         ("\(\([^\)]*\)\)" . 'custom-comment-tag) ; asides are very light
       )))
-   )
+     )
 
 ;;;; The Version with add-to-list instead of direct fontification
-;; (add-hook 'org-mode-hook
-;;    (lambda () (add-to-list 'org-font-lock-extra-keywords
+;; (after! org
+;;  (add-to-list 'org-font-lock-extra-keywords
 ;;    '(
 ;;       ;; ("BOOM" .  'org-table-header)
 ;;       ("\"[a-zA-Z][^\"]*\\S-\"" . 'org-special-keyword) ; quotes
 ;;       ("\(\([^\)]*\)\)" . 'custom-comment-tag) ; asides are very light
-;;     ))))
+;;     )))
 
 ;;;; The direct version
 ;; (font-lock-add-keywords 'org-mode '(

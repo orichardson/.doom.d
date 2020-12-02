@@ -50,7 +50,8 @@
         (append hl-todo-keyword-faces   ; start with the defaults (they're nice!)
           '(("DONE" success bold)
             ("OOPS" error bold)
-            ("NOTE" all-the-icons-blue-alt bold)
+            ("NOTE" all-the-icons-blue bold)
+            ("NEVERMIND" all-the-icons-pink bold)
           ))))
 (setq-default line-spacing 0.13)
 
