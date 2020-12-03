@@ -74,7 +74,8 @@
 ;;; Add Review to keywords
 (after! org (setq org-todo-keywords
                   '((sequence "TODO(t)" "PROJ(p)" "REVIEW(r)" "STRT(s)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
-                   (sequence "[ ](T)A" "[-](S)" "[?](W)" "|" "[X](D)")) ))
+                    ;; (sequence "EXE")
+                   (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")) ))
 ;;; Custom syntax highlighting in regexp mode
 (add-hook 'org-mode-hook
    (lambda () (font-lock-add-keywords nil

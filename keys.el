@@ -3,9 +3,9 @@
 (map! :map org-mode-map "C-c DEL" 'org-mark-ring-last-goto)
 (map! :after org
       (:map evil-org-mode-map
-       :n [C-backtab] #'org-mark-ring-last-goto
+       :n [C-iso-lefttab] #'org-mark-ring-last-goto ; was [C-backtab] before. 
        :n [S-return] #'org-toggle-latex-fragment
-       :n [backtab] #'+org/dedent)
+       :i [backtab] #'+org/dedent))
 ;;;;;;;;;;;;;;;;;;
 ;; The below gives an alternate leader key. If I wanted to replace the leader key,
 ;; I'd do it from init [[https://github.com/hlissner/doom-emacs/issues/820#issuecomment-468470706]]
