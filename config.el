@@ -26,7 +26,10 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;
-(setq doom-theme 'doom-dracula)   ; great
+(setq doom-theme 'oli-one
+      oli-one-brighter-modeline t
+     ;; doom-one-colorful-headers nil ; default
+     )   ; great
 ;; (setq doom-theme 'doom-one)
 ;; (setq doom-theme 'doom-vibrant)
 ;; (setq doom-theme 'doom-manegarm)
@@ -34,6 +37,9 @@
 ;; (setq doom-theme 'doom-nord-light)
 ;; (setq doom-theme 'doom-henna)  ;
 ;; (setq doom-theme 'doom-monokai-pro)
+
+(after! ws-butler
+  (setq ws-butler-keep-whitespace-before-point t) )
 
 (setq doom-font (font-spec :name "DaddyTimeMono" :size 14 )
       ;; doom-variable-pitch-font (font-spec :name "CormorantGaramond" :size 19 :weight 'bold))
@@ -45,17 +51,23 @@
       ;; auto-save-default t
    )
 
+(custom-set-faces!
+  '(aw-leading-char-face
+    :foreground "white" :background "red"
+    :weight bold :height 2.5 :box (:line-width 10 :color "red")))
+
 (after! hl-todo
   (setq hl-todo-keyword-faces
         (append hl-todo-keyword-faces   ; start with the defaults (they're nice!)
-          '(("DONE" success bold)
+          '(("DONE" success
             ("OOPS" error bold)
             ("NOTE" all-the-icons-blue bold)
             ("NEVERMIND" all-the-icons-pink bold)
-          ))))
+          )))))
 (setq-default line-spacing 0.13)
 
-(load! "org-config.el")
+;; (after! org (load! "org-config.el"))
+(load! "org-config.el")                 ; Now I'm thinking I want to do the after inside, for flexibility.
 (load! "keys.el")
 
 ;; I forgot what I was doing here...

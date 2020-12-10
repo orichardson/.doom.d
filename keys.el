@@ -12,6 +12,15 @@
 (map! :map general-override-mode-map
       :g "M-SPC" #'doom/leader)         ; (used to be just-one space)
 
+
+;; (defun switch-to-or-open-journal ()
+;;   "Switch focus to to journal if it is an open window;
+;; otherwise switch buffer if it exists; otherwise create it."
+;;   (interactive)
+;;   (let ((f org-journal--get-entry-path))
+;;     (if (file-exists-p f)
+;;         (get-file-buffer f)
+;;     ))
 (map! :leader "M-SPC" #'+org-capture/open-frame ; Double tap M-SPC for capture
                "j"  #'org-journal-open-current-journal-file    ; (M)-SPC j for journal
                "M-;" #'comment-line)    ; Don't need to take finger off of M key.
@@ -24,7 +33,10 @@
     (insert " "))
 (map! :n "S-SPC" #'insert-a-space-here)
 (map! :n "RET" #'newline)              ; I really need to be able to break lines without going into insert mode..
-
+(map! :map 'org-mode-map
+      :localleader
+      :desc "test desc"
+      "j t" #'newline)
 
 ;; ;;;;;;;;;;;;;;;;;;  LOG  ;;;;;;;;;;;;; ;;;;
 ;; DONE BIND      S-SPC to insert a single space in normal mode

@@ -8,7 +8,10 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
+
 (package! org-roam-server)
+(package! org-superstar :pin "7f83636db215bf5a10edbfdf11d12a132864a914")
+(package! org-fancy-priorities  :disable t) ; should be unnecessary now
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
