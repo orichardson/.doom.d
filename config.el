@@ -42,14 +42,21 @@
   (setq ws-butler-keep-whitespace-before-point t) )
 
 (setq doom-font (font-spec :name "DaddyTimeMono" :size 14 )
-      ;; doom-variable-pitch-font (font-spec :name "CormorantGaramond" :size 19 :weight 'bold))
-      doom-variable-pitch-font (font-spec :family "Vollkorn" :size 15 :weight 'regular)
+      doom-serif-font (font-spec :name "FiraCode" :size 14 )
+      ;; doom-variable-pitch-font (font-spec :name "CormorantGaramond" :size 19 :weight '
+      doom-variable-pitch-font (font-spec :family "Vollkorn" :size 14 :weight 'regular)
+      ;; doom-variable-pitch-font (font-spec :family "FiraCode" :size 14)
       display-line-numbers-type t
       ;; Some changes that seemed good from https://tecosaur.github.io/emacs-config/config.html
       undo-limit 80000000                         ; Raise undo-limit to 80Mb
       evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
       ;; auto-save-default t
-   )
+      global-auto-revert-mode t      )
+
+
+;;; Latex
+(setq TeX-electric-sub-and-superscript nil
+      font-latex-script-display '((raise -0.1) raise 0.1))
 
 (custom-set-faces!
   '(aw-leading-char-face

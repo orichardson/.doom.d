@@ -1,18 +1,36 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
-
-
-;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
-;(package! some-package)
-
 (package! org-roam-server)
 (package! org-superstar :pin "7f83636db215bf5a10edbfdf11d12a132864a914")
 (package! org-fancy-priorities  :disable t) ; should be unnecessary now
 
+; Remote version
+;; (package! org-journal :recipe (:host github :repo "orichardson/org-journal"))
+
+; fLocal version
+(package! org-journal
+  :recipe (:local-repo "~/org-journal/"
+           ;; By default, the package manager grabs all *.el files at the root
+           ;; of the project and nothing else. To include other files, or
+           ;; accommodate unconventional project structures, specify what :files
+           ;; you want:
+           ;;    :files ("*.el" "src/lisp/*.el")
+           ;; With ':no-byte-compile t' you can avoid having to run 'doom sync'
+           ;; every time you change the package.
+           :no-byte-compile t))
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
+
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format

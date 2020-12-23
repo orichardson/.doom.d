@@ -22,21 +22,29 @@
 ;;         (get-file-buffer f)
 ;;     ))
 (map! :leader "M-SPC" #'+org-capture/open-frame ; Double tap M-SPC for capture
-               "j"  #'org-journal-open-current-journal-file    ; (M)-SPC j for journal
-               "M-;" #'comment-line)    ; Don't need to take finger off of M key.
+               "M-;" #'comment-line     ; Don't need to take finger off of M key.
                                         ;   Moreover, only difference between commend and
                                         ;   comment-dwim" is the leader key.
-
+               (:prefix "j"
+                "o"  #'org-journal-open-current-journal-file    ; (M)-SPC j for journal
+                "j"  #'org-journal-new-entry    ; (M)-SPC j for journal
+                )
+         )
 (defun insert-a-space-here ()
     "calls (insert \" \")"
     (interactive)
     (insert " "))
 (map! :n "S-SPC" #'insert-a-space-here)
 (map! :n "RET" #'newline)              ; I really need to be able to break lines without going into insert mode..
+
+;; FIXME
 (map! :map 'org-mode-map
       :localleader
-      :desc "test desc"
-      "j t" #'newline)
+      (:prefix "s"
+       "y" #'org-copy-subtree))
+
+(map! :i "SPC" #'self-insert-command)
+;; (map! :leader "w W" #'ace-swap-window)
 
 ;; ;;;;;;;;;;;;;;;;;;  LOG  ;;;;;;;;;;;;; ;;;;
 ;; DONE BIND      S-SPC to insert a single space in normal mode

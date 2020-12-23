@@ -92,7 +92,7 @@ determine the exact padding."
 
    ;; custom categories
    (level1 magenta)
-   (level2 (doom-darken violet 0.5))
+   (level2 (doom-darken violet 0.25))
    (level3 (if oli-dracula-colorful-headers green   (doom-lighten violet 0.35)))
    (level4 (if oli-dracula-colorful-headers yellow  (doom-lighten magenta 0.35)))
    (level5 (if oli-dracula-colorful-headers cyan    (doom-lighten violet 0.6)))
