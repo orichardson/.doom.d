@@ -42,7 +42,7 @@
   (setq ws-butler-keep-whitespace-before-point t) )
 
 (setq doom-font (font-spec :name "DaddyTimeMono" :size 14 )
-      doom-serif-font (font-spec :name "FiraCode" :size 14 )
+      ;; doom-serif-font (font-spec :name "FiraCode" :size 14 )
       ;; doom-variable-pitch-font (font-spec :name "CormorantGaramond" :size 19 :weight '
       doom-variable-pitch-font (font-spec :family "Vollkorn" :size 14 :weight 'regular)
       ;; doom-variable-pitch-font (font-spec :family "FiraCode" :size 14)

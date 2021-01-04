@@ -1,5 +1,4 @@
 ;;; ~/.doom.d/org-config.el -*- lexical-binding: t; -*-
-
 (setq org-directory "~/org/")           ; must be set before org loads!
 
 (after! org
@@ -351,10 +350,15 @@
   (setq default-org-capture-templates
         '(
           ("j" "Insert into current journal")
-          ("jt" "TODO for today" entry (file+olp org-journal--get-entry-path "TODO-LIST" "Novel")
-           "* TODO %?")
-          ("jn" "NOTES for today" entry (file+olp org-journal--get-entry-path "TODO-LIST" "Notes")
-           "* REVIEW %?")
+          ("jt" "TODO for vestibule" entry (file+olp org-journal--get-entry-path "BOXES" "Vestibule")
+           "* TODO %?\n")
+          ("jr" "Thought, to queueu for review" entry (file+olp org-journal--get-entry-path "Notes")
+           "* REVIEW %?\n")
+          ("jx" "[Default] Into timeline, no date." entry (file+olp org-journal--get-entry-path "Timeline")
+           "* %?\n")
+          ("jb" "Log something already done" entry (file+olp org-journal--get-entry-path "BOXES" "BONUS")
+           "* DONE %?\n\n")
+
 
           ("t" "Global TODO" entry (file+headline "~/org/todo.org" "Inbox")
            "* TODO %?")
