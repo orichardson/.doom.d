@@ -8,9 +8,11 @@
 ; Remote version
 ;; (package! org-journal :recipe (:host github :repo "orichardson/org-journal"))
 
-; fLocal version
-(package! org-journal
-  :recipe (:local-repo "~/org-journal/"
+(package! org-journal)
+
+; Local version
+;(package! org-journal
+; :recipe (:local-repo "~/org-journal/"
            ;; By default, the package manager grabs all *.el files at the root
            ;; of the project and nothing else. To include other files, or
            ;; accommodate unconventional project structures, specify what :files
@@ -18,10 +20,11 @@
            ;;    :files ("*.el" "src/lisp/*.el")
            ;; With ':no-byte-compile t' you can avoid having to run 'doom sync'
            ;; every time you change the package.
-           :no-byte-compile t))
+;          :no-byte-compile t))
 
 
-
+;; https://github.com/hlissner/doom-emacs/issues/2225#issuecomment-661661380;
+;; (package! zoom)
 
 
 ;;;;;;;;;;;;;;;;;;

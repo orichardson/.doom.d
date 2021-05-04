@@ -21,14 +21,22 @@
 ;;     (if (file-exists-p f)
 ;;         (get-file-buffer f)
 ;;     ))
-(map! :leader "M-SPC" #'+org-capture/open-frame ; Double tap M-SPC for capture
+(map! :leader  "M-SPC" #'+org-capture/open-frame ; Double tap M-SPC for capture
                "M-;" #'comment-line     ; Don't need to take finger off of M key.
                                         ;   Moreover, only difference between commend and
                                         ;   comment-dwim" is the leader key.
-               (:prefix "j"
-                "o"  #'org-journal-open-current-journal-file    ; (M)-SPC j for journal
-                "j"  #'org-journal-new-entry    ; (M)-SPC j for journal
-                )
+                                        ;
+               "M-RET" #'org-roam-capture ; NECESSARY
+               "M-j" #'org-journal-new-entry
+               ; TODO FIXME implement the function below.
+               "M-t" #'org-journal--oli/focus-boxes
+               "M-o" #'org-journal-open-current-journal-file
+               "M-f" #'org-roam-find-file
+               "TAB SPC" #'+fold/toggle
+               ;; (:prefix "j"
+               ;;  "o"  #'org-journal-open-current-journal-file    ; (M)-SPC j for journal
+               ;;  "j"  #'org-journal-new-entry    ; (M)-SPC j for journal
+               ;;  )
          )
 (defun insert-a-space-here ()
     "calls (insert \" \")"
@@ -38,7 +46,7 @@
 (map! :n "RET" #'newline)              ; I really need to be able to break lines without going into insert mode..
 
 ;; FIXME
-(map! :map 'org-mode-map
+(map! :map evil-org-mode-map
       :localleader
       (:prefix "s"
        "y" #'org-copy-subtree))
@@ -72,7 +80,13 @@
 ;;        Another possible key: M-SPC M-L
 
 ;; TODO FUNC      Go to the closest ancestral headline titled "Vestibule" or "v".
-;; TODO BIND      Oli's private keymap. C-o?
+;; TODO FUNC      Oli's private keymap. C-o?
 ;; TODO FUNC      demote and next line possible pairing:
 ;; TODO BIND      C-down to swap lines
+;; TODO BIND    C-S-enter in org-mode-map to #'org-insert subheading
+;; TODO BIND    C-V to paste
 ;;
+(map! :i "C-V" #'yank)
+(map! :i "C-S-C" #'kill-ring-save) ;; Emacs' "copy"
+(map! :i :map 'evil-org-mode-map
+      "C-S-RET" #'org-insert-subheading)

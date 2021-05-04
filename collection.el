@@ -1,5 +1,3 @@
-;;; collection.el -*- lexical-binding: t; -*-
-
 ;;; PRACTICE WRITING CODE
 
 (defun oli-mul (arg1 arg2)

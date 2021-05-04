@@ -8,7 +8,9 @@
   (setq org-startup-folded 'showall)
   (setq org-treat-insert-todo-heading-as-state-change t ; log todo creation
         org-log-into-drawer t                           ; log into LOGBOOK drawer
-        org-support-shift-select t                      ; use shift + up down to work like
+        org-support-shift-select 'always  ; this is better
+        org-enforce-todo-dependencies nil  ; want to be able to check off things
+        org-agenda-todo-list-sublevels nil ; don't list in org-agenda either
         ;; org-cycle-separator-lines 1                     ; Don't fold blank lines.
         org-cycle-separator-lines 2                     ; Actually do fold blank lines.
         ;; org-log-done 'time
@@ -23,9 +25,12 @@
   (setq org-clock-persist 'history)               ; Save clock history across emacs sessions.
   (org-clock-persistence-insinuate)
 
-  (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
+  ;; (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
+  (setq org-agenda-files (reverse (directory-files-recursively org-directory "\\.org$")))
+        ; reverse the list to get the better order
 
   ;; add to refile targets immediately
+  ;; Initially stolen from [https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/>
   (defun +org/opened-buffer-files ()
     "Return the list of files currently opened in emacs"
     (delq nil
@@ -36,10 +41,11 @@
                         (buffer-file-name x)))
                   (buffer-list))))
 
-  (setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 5)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 5)
+                             (+org/opened-buffer-files :maxlevel . 5)))
   (setq org-refile-use-outline-path 'file)
   ;; makes org-refile outline working with helm/ivy
-  ;; (setq org-outline-path-complete-in-steps nil)
+  (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-allow-creating-parent-nodes 'confirm) )
 
 ;;; ;;;;;;;;;;;;;;;;  JOURNAL ;;;;;;;;;;;;;;;; ;;;;
@@ -184,6 +190,7 @@
   (setq org-todo-keywords
         '((sequence "TODO(t)" "PROJ(p)" "REVIEW(r)" "STRT(s)" "WAIT(w!)" "HOLD(h!)" "PUSHED(u!)" "|" "DONE(d!)" "KILL(k!)")
           (sequence "TODO(t)" "NOPE(n!)" "|" "DONE(d!)")
+          (sequence "MAYBE(m)" "|" "DONE(d!)")
           (sequence "DECIDE(E)" "DECIDED(D@!)" "BETRAYAL(L!)" "|" "HONOR(R!)" )
           (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](X)"))
         org-todo-keyword-faces
@@ -199,6 +206,7 @@
           ("PUSHED" .     (:weight extra-bold :family "mono" :foreground "wheat3"))
           ("REVIEW" .     (:weight extra-bold :family "mono" :foreground "medium orchiyd"))
           ("TODO" .       (:weight extra-bold :family "mono" :foreground "salmon"))
+          ("MAYBE" .      (:weight extra-bold :family "mono" :foreground "maroon1"))
           ("[ ]" .        (:weight extra-bold :family "mono" :foreground "salmon"))
           ("NOPE" .       (:weight extra-bold :family "mono" :foreground "tomato4"))
           ("[X]" .        (:weight extra-bold :family "mono" :foreground "lime green"))        ))
@@ -240,9 +248,10 @@
   ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
 
   ;; (set-face-attribute 'org-level-3 nil :height 1.2) ;\large
+  (set-face-attribute 'org-level-3 nil :height 1.1) ;\large
   (set-face-attribute 'org-level-2 nil :height 1.25) ;\Large 1.44
   (set-face-attribute 'org-level-1 nil :height 1.5) ;\LARGE 1.728
-  ;; Only use the first 4 styles and do not cycle.
+  ;; [nope] Only use the first 4 styles and do not cycle.
   ;; (setq org-cycle-level-faces nil)
   ;; (setq org-n-level-faces 4)
   ;; Document Title, (\huge)

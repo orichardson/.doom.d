@@ -53,8 +53,21 @@
       ;; auto-save-default t
       global-auto-revert-mode t      )
 
+;; https://github.com/hlissner/doom-emacs/issues/2225
+;; (use-package zoom
+;;   :hook (doom-first-input . zoom-mode)
+;;   :config
+;;   (setq zoom-size '(0.7 . 0.7)
+;;         zoom-ignored-major-modes '(dired-mode vterm-mode help-mode helpful-mode rxt-help-mode help-mode-menu)
+;;         zoom-ignored-buffer-names '("*doom:scratch*" "*info*" "*helpful variable: argv*")
+;;         zoom-ignored-buffer-name-regexps '("^\\*calc" "\\*helpful variable: .*\\*")
+;;         zoom-ignore-predicates (list (lambda () (> (count-lines (point-min) (point-max)) 20)))))
 
-;;; Latex
+
+(setq projectile-sort-order 'recently-active) ; this might be expensive, but..
+(doom/set-frame-opacity 0.97)
+
+ ;;; Latex
 (setq TeX-electric-sub-and-superscript nil
       font-latex-script-display '((raise -0.1) raise 0.1))
 
@@ -74,11 +87,8 @@
 (setq-default line-spacing 0.13)
 
 ;; (after! org (load! "org-config.el"))
-(load! "org-config.el")                 ; Now I'm thinking I want to do the after inside, for flexibility.
+(load! "org-config.el")                 ; Now I'm thinking I want to do the 'after! inside, for flexibility.
 (load! "keys.el")
-
-;; I forgot what I was doing here...
-; (:after evil (setq evil ))
 
 ;; (setq centaur-tabs-style "chamfer")
 
@@ -98,6 +108,7 @@
       (append math-symbol-list-basic math-symbol-list-extended))
 
 ;;; Agda Mode.
+(setq agda2-backend "GHC")
 (load-file (let ((coding-system-for-read 'utf-8))
              (shell-command-to-string "agda-mode locate")))
 
