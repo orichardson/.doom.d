@@ -1,0 +1,13 @@
+# key: #startup
+# name: startup-command
+# --
+
+#startup [/]
+ - [$0 ] Water
+ - [ ] Stretch
+ - [ ] Headphones
+ - [ ] Spotify
+ - [ ] Open calendar
+ - [ ] #INTENT
+ - [ ] Set Timer
+ - [ ] Return

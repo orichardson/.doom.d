@@ -15,7 +15,7 @@
         org-cycle-separator-lines 2                     ; Actually do fold blank lines.
         ;; org-log-done 'time
         ;; org-log-note-previous-state t
-        org-ellipsis "⤵")
+        org-ellipsis "  ▼") ; ↴
   ;; (setq evil-respect-visual-line-mode t)       ; This doesn't work, but it can be made to work in
                                         ; init.el (and in fact it is set there).
 ;;; This may not be necessary; commenting out for now
@@ -26,7 +26,8 @@
   (org-clock-persistence-insinuate)
 
   ;; (setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
-  (setq org-agenda-files (reverse (directory-files-recursively org-directory "\\.org$")))
+  ;; (setq org-agenda-files (reverse (directory-files-recursively org-directory "\\.org$")))
+  (setq org-agenda-files (directory-files org-directory 'nil "\\.org$") )
         ; reverse the list to get the better order
 
   ;; add to refile targets immediately
@@ -219,6 +220,16 @@
   )
 
 
+;; TODO figure out how to disable company in org-mode. This doesn't work
+;;   (and it doens't have  "not" on purpose.)
+;; (setq copmany-global-modes (append company-global-modes 'org-mode))
+(add-hook! mixed-pitch-mode
+  (if mixed-pitch-mode
+      (setq-local line-spacing 0.0)
+      (setq-local line-spacing 0.13)))
+;; (setq-hook! mixed-pitch-mode line-spacing 0.0)
+
+
 (use-package! org-superstar ; "prettier" bullets
   :after org
   :hook (org-mode . org-superstar-mode)
@@ -228,14 +239,15 @@
   (setq org-superstar-leading-bullet ?\s
         org-superstar-leading-fallback ?\s
         org-superstar-remove-leading-stars nil
-        org-superstar-headline-bullets-list '(9673 10036 10057 10028 10040 10047)
-        org-superstar-special-todo-items t
-        org-superstar-todo-bullet-alist
-                 '(("TODO" . 9723)      ; 9744
-                   ("[ ]"  . 11116)
-                   ("DONE" . 10004)
-                   ("NOPE" . 10007)
-                ))
+        org-superstar-headline-bullets-list '(10050 10037 10057 10028 10040 10047 9673)
+        ;; org-superstar-special-todo-items t
+        ;; org-superstar-todo-bullet-alist
+        ;;          '(("TODO" . 9744)      ; 9723, 9744
+        ;;            ("[ ]"  . 11116)
+        ;;            ("DONE" . 9746) ; 10004
+        ;;            ("NOPE" . 10007)
+        ;;         ))
+        )
 
   ;; (setq org-hidden-keywords '(title))
   ;; set basic title font
@@ -275,7 +287,7 @@
    (lambda () (font-lock-add-keywords nil
    '(
       ;; ("BOOM" .  'org-table-header)
-        ("\"[a-zA-Z][^\"]*\\S-\"" . 'highlight-quoted-symbolhr) ; quotes
+        ;; ("\"[a-zA-Z][^\"]*\\S-\"" . 'highlight-quoted-symbolhr) ; quotes
         ("\(\([^\)]*\)\)" . 'custom-comment-tag) ; asides are very light
       )))))
 

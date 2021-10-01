@@ -5,6 +5,8 @@
       (:map evil-org-mode-map
        :n [C-iso-lefttab] #'org-mark-ring-last-goto ; was [C-backtab] before. 
        :n [S-return] #'org-toggle-latex-fragment
+       :n "C-j" #'org-forward-heading-same-level
+       :n "C-k" #'org-backward-heading-same-level
        :i [backtab] #'+org/dedent))
 ;;;;;;;;;;;;;;;;;;
 ;; The below gives an alternate leader key. If I wanted to replace the leader key,
@@ -43,13 +45,16 @@
     (interactive)
     (insert " "))
 (map! :n "S-SPC" #'insert-a-space-here)
+
 (map! :n "RET" #'newline)              ; I really need to be able to break lines without going into insert mode..
 
 ;; FIXME
-(map! :map evil-org-mode-map
-      :localleader
-      (:prefix "s"
-       "y" #'org-copy-subtree))
+;; ;; maybe this is broken because keys.el loads before org-superstar?
+(after! org
+  (map! :map evil-org-mode-map
+        :localleader
+        (:prefix "s"
+         "y" #'org-copy-subtree)))
 
 (map! :i "SPC" #'self-insert-command)
 ;; (map! :leader "w W" #'ace-swap-window)
@@ -82,10 +87,13 @@
 ;; TODO FUNC      Go to the closest ancestral headline titled "Vestibule" or "v".
 ;; TODO FUNC      Oli's private keymap. C-o?
 ;; TODO FUNC      demote and next line possible pairing:
-;; TODO BIND      C-down to swap lines
+;; KILL BIND      C-down to swap lines
 ;; TODO BIND    C-S-enter in org-mode-map to #'org-insert subheading
-;; TODO BIND    C-V to paste
+;; DONE BIND    C-V to paste
+;; TODO FUNC
 ;;
+;;: maybe
+;;thought: maybe
 (map! :i "C-V" #'yank)
 (map! :i "C-S-C" #'kill-ring-save) ;; Emacs' "copy"
 (map! :i :map 'evil-org-mode-map

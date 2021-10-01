@@ -37,14 +37,14 @@
 ;; (setq doom-theme 'doom-nord-light)
 ;; (setq doom-theme 'doom-henna)  ;
 ;; (setq doom-theme 'doom-monokai-pro)
-
 (after! ws-butler
   (setq ws-butler-keep-whitespace-before-point t) )
 
 (setq doom-font (font-spec :name "DaddyTimeMono" :size 14 )
       ;; doom-serif-font (font-spec :name "FiraCode" :size 14 )
       ;; doom-variable-pitch-font (font-spec :name "CormorantGaramond" :size 19 :weight '
-      doom-variable-pitch-font (font-spec :family "Vollkorn" :size 14 :weight 'regular)
+      doom-variable-pitch-font (font-spec :name "Vollkorn" :size 15 :weight 'regular)
+      ;; doom-serif-font (font-spec :name "Vollkorn" :size 14 :weight 'regular)
       ;; doom-variable-pitch-font (font-spec :family "FiraCode" :size 14)
       display-line-numbers-type t
       ;; Some changes that seemed good from https://tecosaur.github.io/emacs-config/config.html
@@ -52,6 +52,8 @@
       evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
       ;; auto-save-default t
       global-auto-revert-mode t      )
+
+;; (setq +word-wrap-text-modes (append 'org-mode org-journal-mode) +word-wrap-text-modes))
 
 ;; https://github.com/hlissner/doom-emacs/issues/2225
 ;; (use-package zoom
